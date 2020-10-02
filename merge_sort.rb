@@ -1,41 +1,27 @@
 # Merge Sort
   # Take in an array
-    # If less than 2 sides, return array
-    # Else break up array into 2 sides
+    # If less than 2 sides
+      # Return array
+    # Else
       # Find middle of array
       # Set left side from start up to middle
       # Set right side from middle to end
-      # Sort the left side
-      # Sort the right side
+      # Sort the left side with recursion
+      # Sort the right side with recursion
+      # Merge Sides with the sorted left and sorted ride sides
 
 # Merge Sides
   # Take in the two sides
-  # Compare left to right
-    # If left is empty
-      # Return right
-    # If right is empty
-      # Return left
-    # If left is less than right
-      # Return left
-    # Else
-      # Return right
-
-def merge_sides(left, right)
-  if left.empty?
-    right
-  elsif right.empty?
-    left
-  elsif left[0] < right[0]
-    # Confused here with how this part works
-    [left[0]] + merge_sides(left[1..left.length], right)
-  else
-    # Confused here with how this part works
-    [right[0]] + merge_sides(left, right[1..right.length])
-  end
-end
+  # If left side is empty
+    # Return right
+  # If right side is empty
+    # Return left
+  # If left is less than right
+    # Return left and add to a recursion of remaining left side and full right side
+  # Else
+    # Return right and add to a recursion of full left side and remaining right side
 
 def merge_sort(ary)
-  #puts ary.to_s # For debugging
   if ary.length < 2
     ary
   else
@@ -48,7 +34,16 @@ def merge_sort(ary)
   end
 end
 
-print merge_sort([2, 1, 5, 4, 3])
-puts
-print merge_sort([7,9,1,2])
-puts
+def merge_sides(left, right)
+  if left.empty?
+    right
+  elsif right.empty?
+    left
+  elsif left[0] < right[0] 
+    [left[0]] + merge_sides(left[1..left.length], right)
+  else
+    [right[0]] + merge_sides(left, right[1..right.length])
+  end
+end
+
+p merge_sort([2, 1, 5, 4, 3])
